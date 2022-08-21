@@ -1,4 +1,4 @@
-package com.demoqa;
+package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class StudentRegistrationForm {
 
     @BeforeAll
-    static void congigure() {
+    static void configure() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.browserSize = "1920x1080";
     }
@@ -30,7 +30,7 @@ public class StudentRegistrationForm {
         $("#dateOfBirthInput").sendKeys("01.02.2001");
         $("#subjectsInput").setValue("Maths").pressEnter();
         $("[for=\"hobbies-checkbox-2\"]").click();
-         $("#uploadPicture").uploadFile(new File("src/test/java/../resources/PC.png"));
+         $("#uploadPicture").uploadFile(new File("src/test/resources/PC.png"));
          $("#currentAddress").setValue("Minsk, Vostochnaya street");
          executeJavaScript("$('footer').remove()");
          executeJavaScript("$('#fixedban').remove()");
