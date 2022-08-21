@@ -2,50 +2,48 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.demoqa.pages.RegistrationFormPage;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Selenide.$;
+import static com.demoqa.tests.TestData.*;
+import static com.demoqa.utils.RandomUtils.*;
+import static java.lang.String.format;
 
-public class RegistrationFormWithPageObjectsTests {
+public class RegistrationFormWithPageObjectsTests extends TestBase {
     RegistrationFormPage registrationFormPage = new RegistrationFormPage();
-
-
-    @BeforeAll
-    static void configure() {
-        Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "1920x1080";
-    }
 
     @Test
     void fillForm() {
 
         registrationFormPage
                 .openPage()
-                .setFirstName("Tanya")
-                .setLastName("Vai")
-                .setEmail("tanyavai@test.com")
-                .setGender("Female")
-                .setUserNumber("1234567897")
-                .setBirthDate("02", "January", "2001")
-                .setSubjects("Maths").setSubjects("English")
-                .setHobby("Reading")
-                .uploadPicture("src/test/resources/PC.png")
-                .setAddress("Minsk, Vostochnaya street")
-                .selectStateAndCity("NCR", "Gurgaon")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setEmail(userEmail)
+                .setGender(userGender)
+                .setUserNumber(userNumber)
+                .setBirthDate(day, month, year)
+                .setSubjects(subject1).setSubjects(subject2)
+                .setHobby(hobby)
+                .uploadPicture(picturePath)
+                .setAddress(userAddress)
+                .selectStateAndCity(state, city)
                 .clickButton()
 
                 .checkResultsTableVisible()
-                .checkResults("Student Name", "Tanya Vai")
-                .checkResults("Student Email", "tanyavai@test.com")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567897")
-                .checkResults("Date of Birth", "02 January,2001")
-                .checkResults("Subjects", "Maths, English")
-                .checkResults("Hobbies", "Reading")
-                .checkResults("Picture", "PC.png")
-                .checkResults("Address", "Minsk, Vostochnaya street")
-                .checkResults("State and City", "NCR Gurgaon");
+                .checkResults("Student Name", expectedFullName)
+                .checkResults("Student Email", userEmail)
+                .checkResults("Gender", userGender)
+                .checkResults("Mobile", userNumber)
+                .checkResults("Date of Birth", expectedDateOfBirth)
+                .checkResults("Subjects", expectedSubjects)
+                .checkResults("Hobbies", hobby)
+                .checkResults("Picture", picture)
+                .checkResults("Address", userAddress)
+                .checkResults("State and City", expectedStateAndCity);
 
     }
 
@@ -54,16 +52,16 @@ public class RegistrationFormWithPageObjectsTests {
 
         registrationFormPage
                 .openPage()
-                .setFirstName("Tanya")
-                .setLastName("Vai")
-                .setGender("Female")
-                .setUserNumber("1234567897")
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setGender(userGender)
+                .setUserNumber(userNumber)
                 .clickButton()
 
                 .checkResultsTableVisible()
-                .checkResults("Student Name", "Tanya Vai")
-                .checkResults("Gender", "Female")
-                .checkResults("Mobile", "1234567897");
+                .checkResults("Student Name", expectedFullName)
+                .checkResults("Gender", userGender)
+                .checkResults("Mobile", userNumber);
 
     }
 }
