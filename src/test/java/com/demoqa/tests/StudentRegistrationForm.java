@@ -2,6 +2,7 @@ package com.demoqa.tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
@@ -19,6 +20,7 @@ public class StudentRegistrationForm {
         Configuration.browserSize = "1920x1080";
     }
     @Test
+    @Disabled("Outdated version")
     void fillForm() {
         open("/automation-practice-form");
         $("#firstName").setValue("Tanya");
