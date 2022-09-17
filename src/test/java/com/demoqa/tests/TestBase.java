@@ -17,8 +17,8 @@ public class TestBase {
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        if(System.getProperty("remote_url")!=null) {
-            Configuration.remote =System.getProperty("remote_url");
+        if (System.getProperty("remote_url") != null) {
+            Configuration.remote = System.getProperty("remote_url");
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
         }
@@ -28,7 +28,6 @@ public class TestBase {
         Configuration.browserSize = System.getProperty("browser_size", "1920x1080");
 
         Configuration.baseUrl = "https://demoqa.com";
-
     }
 
     @AfterEach
